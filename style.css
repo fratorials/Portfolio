@@ -1,0 +1,305 @@
+body {
+    background-color: black;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.centra {
+    width: 1200px;
+    margin: auto;
+}
+
+
+
+.avvio {
+    opacity: 0;
+    transition: opacity 1s;
+  }
+
+.rivela{
+    position: relative;
+    transform: translateX(-100%);
+    opacity: 0;
+    transition: 1s all ease;
+}
+  
+.rivela.attivo{
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.rivela_sotto{
+    position: relative;
+    transform: translateY(100%);
+    opacity: 0;
+    transition: 1s all ease;
+}
+  
+.rivela_sotto.attivo_sotto{
+    transform: translateY(0);
+    opacity: 1;
+}
+
+
+
+
+@media (max-width: 2300px){
+    .centra {
+        width: 1200px;
+    }
+    h1 {
+        font-size: 150px;
+        float: right;
+        text-align: right;
+        font-weight: bold;
+        line-height: 121px;
+    }
+
+    .hero img{
+        width: 30%;
+        float: left;
+        margin-top: 40px; 
+    }
+
+    h2{
+        font-size: 7rem;
+        font-weight: 900;
+        margin-left: 5%;
+        padding-top: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+
+    .centra {
+        width: 400px;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    h1 {
+        margin-left: 5%;
+        margin-right: 5%;
+        width: 90%;
+        font-size: 65px;
+        text-align: center;
+        font-weight: bold;
+        line-height: 55px;
+
+    }
+    .hero img{
+        padding: 0;
+        width: 70%;
+        position: relative;
+        margin-left: 15%;
+        margin-right: 15%;
+    }
+
+    h2{
+        font-size: 5rem;
+        font-weight: 900;
+        width: 90%;
+        margin-left: 5%;
+        margin-right: 5%;
+        padding-top: 350px;
+    }
+}
+
+
+@keyframes gradient {
+	0% {
+		background-position: 0% 50%;
+	}
+	50% {
+		background-position: 100% 50%;
+	}
+	100% {
+		background-position: 0% 50%;
+	}
+}
+
+
+
+
+header {
+    height: 100px;
+}
+
+header ul{
+    width: fit-content;
+    margin-top: 25px;
+    
+}
+
+header li{
+    font-size: 20px;
+    display: inline;
+    margin-right: 25px;
+}
+
+header a{
+    color: #b4b4b4;
+    text-decoration: none;
+    transition: 200ms;
+}
+
+header a:hover{
+    color: #252525;
+    transition: 500ms;
+}
+
+.hero {
+    height: 500px;
+    padding-top: 100px;
+}
+
+.hero h1{
+    background-image: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+    animation: gradient 5s ease infinite;
+    background-clip: text;
+    -webkit-background-clip: text;
+    background-size: 150% 200%;
+    color: #E5E5E5;
+    transition: 2000ms;
+}
+
+.hero h1:hover{
+    color: transparent;
+    transition: 400ms;
+}
+
+
+
+
+.skills {
+    height: 2080px;
+    background-image: linear-gradient(-45deg, #ee7752, #7dd367, #23a6d5, #23d5ab);
+    animation: gradient 5s ease infinite;
+    clip-path: url(#clip-path);
+    background-size: 150% 200%;
+    z-index: 0;
+}
+
+.skills svg{
+    position: absolute;
+    width: 100%;
+    margin-left: -900px;
+    fill: transparent;
+    z-index: 0;
+}
+
+.skills h2{
+    font-family: 'Libre Barcode 39 Text', cursive;
+    color: #ffffff;
+    z-index: 1;
+}
+
+.skills ul{
+    list-style-type: none;
+    width: 80%;
+    margin: auto;
+    padding: 0;
+    height: fit-content;
+}
+
+.skills li{
+    height: fit-content;
+    width: 100%;
+    margin-bottom: 20px;
+    text-decoration: none;
+}
+
+
+.skills p{
+    color: #f1f1f1;
+    font-size: 30px;
+    margin-top: 1%;
+    font-weight: bolder;
+    text-decoration: none;
+    float: left;
+    width: fit-content;
+}
+
+
+.skill {
+    padding-bottom: 60px;
+  }
+  
+  .skill-name {
+    color: #f1f1f1;
+    font-size: 30px;
+    margin-top: 30px;
+    font-weight: bolder;
+    text-decoration: none;
+    float: left;
+    width: fit-content;
+    margin-bottom: 5px;
+  }
+  
+  .progress {
+    width: 100%;
+    height: 20px;
+    background-color: #eee;
+    border-radius: 20px;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    border-radius: 20px;
+    background-color: #000000;
+    animation: progress-bar-animation 2s ease-in-out;
+  }
+  
+  .percentage {
+    margin-top: 5px;
+    color: #fff;
+    float: right;
+  }
+  
+  @keyframes progress-bar-animation {
+    0% {
+      width: 0;
+    }
+  }
+  
+  .html {
+    background-color: #dc3545;
+  }
+  
+  .css {
+    background-color: #006eff;
+  }
+  
+  .js {
+    background-color: #d4d42b;
+  }
+    
+  .php {
+    background-color: #552bd4;
+  }
+
+  .csharp {
+    background-color: #2b74d4;
+  }
+    
+
+
+.curriculum h3 {
+    color: #fff;
+    font-size: 2000%;
+}
+
+
+
+
+
+footer {
+    height: 800px;
+    background-color: #111111;
+
+    width: 100%;
+}
+
+
+

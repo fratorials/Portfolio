@@ -1,0 +1,32 @@
+.skill {
+    margin-bottom: 15px;
+  }
+  
+  .skill-name {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  
+  .progress {
+    width: 100%;
+    height: 20px;
+    background-color: #eee;
+    border-radius: 20px;
+  }
+  
+  .progress-bar {
+    height: 100%;
+    border-radius: 20px;
+    background-color: #000000;
+    animation: progress-bar-animation 2s ease-in-out;
+  }
+  
+  .percentage {
+    margin-top: 5px;
+  }
+  
+  @keyframes progress-bar-animation {
+    0% {
+      width: 0;
+    }
+  }
