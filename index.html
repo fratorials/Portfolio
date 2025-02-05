@@ -1,23 +1,31 @@
 <html>
     <head>
         <title>Francesco Mariani</title>
+        <meta name="keywords" content="is,fra,who,whoisfra,francesco,mariani">
+        <meta name="description" content="whoisfra.it, sito di Francesco Mariani">
+        <meta name="theme-color" content="#751919">
+        <link rel="stylesheet" href="script.js">
         <link rel="stylesheet" href="style.css">
+        <link rel="icon" type="image/png" href="./img/logo.png">
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Text&display=swap" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-        <script src="script.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
 
     <body class="avvio">
         <header>
+            <a href="https://whoisfra.it">
+                <p class="hacker-text-title" data-original="whoisfra">whoisfra</p><p class="it">.it</p>
+            </a>
+            <span class="menu-toggle">&#9776;</span>
             <ul>
-                <li><a href="">Home</a></li>
-                <li><a href="">Skills</a></li>
-                <li><a href="">Curriculum</a></li>
-                <li><a href="">Galleria</a></li>
-                <li><a href="">Contatti</a></li>
+                <li><a href="https://whoisfra.it/">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#curriculum">Curriculum</a></li>
+                <li><a href="galleria">Galleria</a></li>
+                <li><a href="#contatti">Contatti</a></li>
             </ul>
         </header>
         
@@ -28,84 +36,102 @@
                     <h1>Francesco</br>Mariani</h1>
                 </div>
             </div>
-        </div>
+        
+            <div class="cybersec">
+                <h2 class="hacker-text" data-original="Chi sono">Chi sono</h2>
+                <div class="terminal">
+                    <span id="output"></span><span class="cursor"></span>
+                </div>
+            </div>
 
-        <div class="skills">
-            <svg xmlns="http://www.w3.org/2000/svg" width="2402.998" height="1653.071" viewBox="0 0 2402.998 1653.071">
-                <path id="Tracciato_1" data-name="Tracciato 1" d="M493.1,803.528h0c50.341,76.023,364.168,324.982,754.133,373.578s879.932-91.74,1039.1-126.578,449.407-41.034,567.9,283.948-73.7,753.69-73.7,753.69v364.38s-66.17-282.777-524.427-235.747-898.482,76.364-1324.006,85.944-282.853-268.252-282.853-268.252Z" transform="translate(-490.327 -800)" />
-                <clipPath id="clip-path" xmlns="http://www.w3.org/2000/svg" width="2402.998" height="1653.071" viewBox="0 0 2402.998 1653.071">
-                    <path id="Tracciato_1" data-name="Tracciato 1" d="M493.1,803.528h0c50.341,76.023,364.168,324.982,754.133,373.578s879.932-91.74,1039.1-126.578,449.407-41.034,567.9,283.948-73.7,753.69-73.7,753.69v364.38s-66.17-282.777-524.427-235.747-898.482,76.364-1324.006,85.944-282.853-268.252-282.853-268.252Z" transform="translate(-800.32 -900.589)"/>
-                </clipPath>
-            </svg>
-            <h2 class="rivela">Skills</h2>
-            <ul> 
-                <li class="rivela_sotto">
-                    <div class="skill">
-                        <div class="skill-name">HTML</div>
-                        <div class="progress">
-                          <div class="progress-bar html" style="width: 90%;"></div>
+            <div id="skills" class="skills">
+                <h2 class="rivela">Skills</h2>
+                <div class="skill-container">
+                    <div class="rivela_sotto" id="skill">
+                            <div class="skill-title">
+                                <h3>Web Development</h3>
+                            </div>
+                            <div class="skill-content">
+                                <p>HTML</p>
+                                <p>CSS</p>
+                                <p>JavaScript</p>
+                                <p>SQL</p>
+                            </div>
                         </div>
-                        <div class="percentage">90%</div>
-                      </div>
-                </li>
-
-                <li class="rivela_sotto">
-                    <div class="skill">
-                        <div class="skill-name">CSS</div>
-                        <div class="progress">
-                          <div class="progress-bar css" style="width: 70%;"></div>
+                        <div class="rivela_sotto" id="skill">
+                            <div class="skill-title">
+                                <h3>Programmazione</h3>
+                            </div>
+                            <div class="skill-content">
+                                <p>Python</p>
+                                <p>Java</p>
+                                <p>C#</p>
+                                <p>Fortran77</p>
+                            </div>
                         </div>
-                        <div class="percentage">70%</div>
-                      </div>
-                </li>
-
-                <li class="rivela_sotto">
-                    <div class="skill">
-                        <div class="skill-name">JavaScript</div>
-                        <div class="progress">
-                          <div class="progress-bar js" style="width: 30%;"></div>
+                        <div class="rivela_sotto" id="skill">
+                            <div class="skill-title">
+                                <h3>Cybersecurity</h3>
+                            </div>
+                            <div class="skill-content">
+                                <p>Penetration Testing</p>
+                                <p>Network Security</p>
+                                <p>Web Security</p>
+                                <p>Forensics</p>
+                            </div>
                         </div>
-                        <div class="percentage">30%</div>
-                      </div>
-                </li>
+                        <div class="rivela_sotto" id="skill">
+                            <div class="skill-title">
+                                <h3>System Administration</h3>
+                            </div>
+                            <div class="skill-content">
+                                <p>Linux</p>
+                                <p>Windows</p>
+                                <p>Virtualization</p>
+                                <p>Docker</p>
+                                <p>Networking</p>
+                            </div>
+                        </div>        
+                </div>
+            </div>
 
-                <li class="rivela_sotto">
-                    <div class="skill">
-                        <div class="skill-name">PHP</div>
-                        <div class="progress">
-                          <div class="progress-bar php" style="width: 5%;"></div>
+            <div id="curriculum" class="curriculum">
+                <div class="terminal2" id="terminal">
+                    <div class="title-bar"> <span class="dots">></span> <span>root@fra:~# apt upgrade</span> </div>
+                    <div id="outputd">
+                        <p>Reading package lists... Done</p>
+                        <p>Building dependency tree... Done</p>
+                        <p>Reading state information... Done</p>
+                        <p>Calculating upgrade... Done</p>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class='progress-bar'>
+                            <div class="progress" id="progress"></div>
                         </div>
-                        <div class="percentage">5%</div>
-                      </div>
-                </li>
+                        <span class="speed" id="speed">0 KB/s</span>
+                    </div>
+                </div>
+            </div>
 
-                <li class="rivela_sotto">
-                    <div class="skill">
-                        <div class="skill-name">C#</div>
-                        <div class="progress">
-                          <div class="progress-bar csharp" style="width: 80%;"></div>
-                        </div>
-                        <div class="percentage">80%</div>
-                      </div>
-                </li>
-
-            </ul>
-        </div>
-
-        <div class="curriculum">
-            <h3>Curriculum</h3>
-        </div>
-
-        <div class="ikigai">
-            <h3>Obbiettivi</h3>
-        </div>
-
-        <div class="lavori">
-
+            <div id="contatti" class="contatti" style="background-color: rgb(36, 36, 36);">
+                <div class="cmd">
+                    <div class="cmd-content">
+                        <p>Contatti cmd</p>
+                        <p>C:\Users\Francesco> Get-ContactInfo</p>
+                        <p>Email: <a href="mailto:fratorials@gmail.com">fratorials@gmail.com</a></p>
+                        <p>Cell: <a href="tel:+393499339333">(+39) 349 933 9333</a></p>
+                        <p>LinkedIn: <a href="https://www.linkedin.com/in/francesco-mariani" target="_blank">Francesco Mariani</a></p>
+                        <p>GitHub: <a href="https://github.com/fratorials" target="_blank">github.com/fratorials</a></p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <footer>
-            
+            <center>
+                <p>©2025 Francesco Mariani | All Rights Reserved</p>
+            </center>
         </footer>
+        <script src="script.js"></script>
     </body>
 </html>
