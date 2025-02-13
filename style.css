@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('https://whoisfra.it/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900; /* Imposta l'intervallo di pesi supportati */
+    font-style: normal;
+    font-display: swap; /* Ottimizza il caricamento del font */
+  }
+
 body {
     background-color: black;
     width: 100%;
@@ -53,7 +61,7 @@ body {
         font-size: 150px;
         float: right;
         text-align: right;
-        font-weight: bold;
+        font-weight: 700;
         line-height: 121px;
     }
 
@@ -79,7 +87,7 @@ body {
         width: 90%;
         font-size: 65px;
         text-align: center;
-        font-weight: bold;
+        font-weight: 700;
         line-height: 55px;
 
     }
@@ -142,7 +150,7 @@ body {
         width: 90%;
         font-size: 60px;
         text-align: center;
-        font-weight: bold;
+        font-weight: 700;
         line-height: 52px;
     }
 
@@ -282,16 +290,6 @@ header p{
     word-wrap: break-word;
 }
 
-.cursor {
-    display: inline-block;
-    width: 10px;
-    height: 18px;
-    background-color: red;
-    animation: blink 0.8s infinite;
-}
-@keyframes blink {
-    50% { opacity: 0; }
-}
 
 .terminal-input {
     width: 100%;
@@ -379,7 +377,7 @@ header p{
 }
 .title-bar span {
     color: red;
-    font-weight: bold;
+    font-weight: 700;
 }
 .dots {
     margin-right: 10px;
@@ -507,7 +505,13 @@ footer p{
 
 footer a{
     text-decoration: none;
-    color: #000000;
+    color: #b4b4b4;
+    transition: 1s;
+}
+
+footer a:hover{
+    color: #252525;
+    transition: 500ms;
 }
 
 footer h2{

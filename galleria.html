@@ -1,17 +1,20 @@
 <html>
     <head>
         <title>Francesco Mariani - Galleria</title>
-        <link rel="stylesheet" href="style.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link href="https://fonts.googleapis.com/css2?family=Libre+Barcode+39+Text&display=swap" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-        <script src="script.js"></script>
+        <link rel="stylesheet" href="style_gallery.css">
+        <link rel="stylesheet" href="fonts.css">
+        <link rel="preconnect" href="https://whoisfra.it">
+        <script src="script_gallery.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta charset="UTF-8">
     </head>
 
     <body class="avvio">
         <header>
+            <a href="https://whoisfra.it">
+                <p class="hacker-text-title" data-original="whoisfra">whoisfra</p><p class="it">.it</p>
+            </a>
+            <span class="menu-toggle">&#9776;</span>
             <ul>
                 <li><a href="https://whoisfra.it/">Home</a></li>
                 <li><a href="https://whoisfra.it/#skills">Skills</a></li>
@@ -22,16 +25,45 @@
         </header>
         
         <div class="centra">
-            <div class="hero">
-                <div id="gradiente-testo">
-                    <h1>Galleria</h1>
-                </div>
+            <div class="galleria">
+                <div class="cartella">
+                    <img src="./img/cartella_chiusa.png" alt="Cartella 1">
+                    <div class="immagini">
+                        <div class="immagini">
+                            <img src="immagine1.jpg" alt="Immagine 1">
+                            <img src="immagine2.jpg" alt="Immagine 2">
+                          </div>
+                    </div>
+                  </div>
+
+                  <div class="cartella">
+                    <img src="./img/cartella_chiusa.png" alt="Cartella 1">
+                    <div class="immagini">
+                        <div class="immagini">
+                            <img src="immagine1.jpg" alt="Immagine 1">
+                            <img src="immagine2.jpg" alt="Immagine 2">
+                          </div>
+                    </div>
+                  </div>
+
+                  <div class="cartella">
+                    <img src="./img/cartella_chiusa.png" alt="Cartella 1">
+                    <div class="immagini">
+                        <div class="immagini">
+                            <img src="immagine1.jpg" alt="Immagine 1">
+                            <img src="immagine2.jpg" alt="Immagine 2">
+                          </div>
+                    </div>
+                  </div>
             </div>
         </div>
-        
 
+        
         <footer>
-            
+            <center>
+                <p>2025 Francesco Mariani | <a href="https://whoisfra.it/privacypolicyandcookies">Informativa Cookies e Privacy</a></p>
+            </center>
         </footer>
+        <script src="script_gallery.js"></script>
     </body>
 </html>

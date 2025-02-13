@@ -22,6 +22,8 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 });
 
+
+// Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function(e) {
       e.preventDefault();
@@ -118,91 +120,113 @@ hackerTextt.addEventListener('mouseover', () => {
 
 
 
+//Terminale interattivo
 
-// Terminale Chi sono
+const terminal = document.querySelector('.terminal');
+const output = document.getElementById('output');
+let currentInput;
+let initialTextShown = false; // Flag per evitare che il testo iniziale venga mostrato più volte
 
-function typeText() {
-    const text = "root@fra:~$ Benvenuto!\nroot@fra:~$ Inizio il mio percorso da bambino, adoravo smontare ogni cosa che avevo in casa di elettronico\n root@fra:~$ Ora sono un ethical hacker e sviluppatore web\nroot@fra:~$ Spero di poterti essere utile!\n root@fra:~$ Digita 'fra help' per visualizzare i comandi disponibili";
+function typeText(text, delay = 30) {
+    if (initialTextShown) return; // Impedisce l'esecuzione se il testo è già stato mostrato
+
     let index = 0;
-    
     function type() {
         if (index < text.length) {
-            document.getElementById("output").innerHTML += text[index] === '\n' ? '<br>' : text[index];
+            output.innerHTML += text[index] === '\n' ? '<br>' : text[index];
             index++;
-            setTimeout(type, Math.random() * 25 + 5);
+            setTimeout(type, Math.random() * 15 + 5);
         } else {
             enableInput();
+            initialTextShown = true; // Imposta il flag a true dopo aver mostrato il testo
         }
     }
-    
-    setTimeout(type, 1000);
+    setTimeout(type, delay);
 }
 
 function enableInput() {
-    const terminal = document.querySelector('.terminal');
-    const input = document.createElement('input');
-    input.type = 'text';
-    input.className = 'terminal-input';
-    input.placeholder = 'Digita qui...';
-    terminal.appendChild(input);
+    currentInput = document.createElement('input');
+    currentInput.type = 'text';
+    currentInput.className = 'terminal-input';
+    currentInput.placeholder = 'Digita qui...';
+    terminal.appendChild(currentInput);
+    currentInput.focus();
 
-    input.addEventListener('keydown', function(event) {
-        if (event.key === 'Enter') {
-            const value = input.value.trim().toLowerCase();
-            if (value === 'help') {
-                displayHelpMessage();
-            } else if (value === 'info') {
-                displayInfoMessage();
-            } else if (value === 'commands') {
-                displayCommandsList();
-            } else if (value === 'chi sei?' || 'chi sei') {
-                const response = document.createElement('div');
-                response.className = 'response';
-                response.innerHTML = "Chi sono???";
-                terminal.appendChild(response);
-                termin
-            } else if (value === 'ciao'){
-                const response = document.createElement('div');
-                response.className = 'response';
+    currentInput.addEventListener('keydown', handleInput);
+}
+
+function handleInput(event) {
+    if (event.key === 'Enter') {
+        const value = event.target.value.trim().toLowerCase();
+        event.target.value = '';
+
+        const response = document.createElement('div');
+        response.className = 'response';
+
+        switch (value) {
+            case 'help':
+            case 'fra help':
+                response.innerHTML = "Comandi disponibili:<br>- help: Visualizza questo messaggio di aiuto<br>- info: Mostra informazioni sul sito<br>- comandi: Elenca tutti i comandi disponibili<br>- chi sei?: Informazioni sull'utente<br>- ciao: Saluta";
+                break;
+            case 'info':
+                response.innerHTML = "Questo è un terminale interattivo. Puoi utilizzare i comandi disponibili per ottenere informazioni.";
+                break;
+            case 'comandi':
+                response.innerHTML = "Lista dei comandi:<br>- help<br>- info<br>- comandi<br>- chi sei?<br>- ciao<br>- clear<br>- exit<br>- data<br>- ora<br>- versione";
+                break;
+            case 'chi sei?':
+            case 'chi sei':
+                response.innerHTML = "Sono un ethical hacker e sviluppatore web. Spero di poterti essere utile!";
+                break;
+            case 'ciao':
                 response.innerHTML = "Ciao!";
-                terminal.appendChild(response);
-            } else {
-                const response = document.createElement('div');
-                response.className = 'response';
-                response.innerHTML = "Comando non riconosciuto. Digita 'help' per la lista dei comandi.";
-                terminal.appendChild(response);
-            }
-            input.value = '';
+                break;
+            case 'data':
+                response.innerHTML = new Date().toLocaleDateString();
+                break;
+            case 'ora':
+                response.innerHTML = new Date().toLocaleTimeString();
+                break;
+            case 'versione':
+                response.innerHTML = "Terminale V1.0_alpha";
+                break;
+            case 'clear':
+                terminal.innerHTML = ''; // Cancella tutto
+                enableInput(); // Ricrea l'input
+                return; // Importante per evitare di aggiungere una risposta vuota
+            case 'exit':
+                response.innerHTML = "Uscita dal terminale.";
+                enableInput(); // Ricrea l'input
+                return;
+            default:
+                response.innerHTML = "Comando non riconosciuto. Digita 'fra help' per la lista dei comandi.";
         }
-    });
+
+        terminal.insertBefore(response, currentInput);
+        terminal.scrollTop = terminal.scrollHeight;
+    }
 }
 
-function displayHelpMessage() {
+const initialText = `root@fra:~$ Benvenuto!\nroot@fra:~$ Inizio il mio percorso da bambino, adoravo smontare ogni cosa che avevo in casa di elettronico\nroot@fra:~$ Ora sono un ethical hacker e sviluppatore web\nroot@fra:~$ Spero di poterti essere utile!\nroot@fra:~$ Digita 'fra help' per visualizzare i comandi disponibili`;
+
+// Attiva la funzione typeText quando l'elemento .terminal è visibile
+window.addEventListener('scroll', handleScroll);
+
+function handleScroll() {
     const terminal = document.querySelector('.terminal');
-    const message = document.createElement('div');
-    message.className = 'help-message';
-    message.innerHTML = "Comandi disponibili:<br>- help: Visualizza questo messaggio di aiuto<br>- info: Mostra informazioni sul sito<br>- commands: Elenca tutti i comandi disponibili";
-    terminal.appendChild(message);
-    terminal.style.height = 'auto';
+    const windowHeight = window.innerHeight;
+    const terminalTop = terminal.getBoundingClientRect().top;
+    const elementVisible = 120;
+
+    if (terminalTop < windowHeight - elementVisible) {
+        typeText(initialText, 500); // Passa il testo iniziale alla funzione
+        window.removeEventListener('scroll', handleScroll); // Disabilita l'event listener dopo l'esecuzione
+    }
 }
 
-function displayInfoMessage() {
-    const terminal = document.querySelector('.terminal');
-    const message = document.createElement('div');
-    message.className = 'info-message';
-    message.innerHTML = "Questo è un terminale interattivo. Puoi utilizzare i seguenti comandi per ottenere informazioni specifiche.";
-    terminal.appendChild(message);
-    terminal.style.height = 'auto';
-}
 
-function displayCommandsList() {
-    const terminal = document.querySelector('.terminal');
-    const message = document.createElement('div');
-    message.className = 'commands-list';
-    message.innerHTML = "Lista dei comandi:<br>- help: Visualizza questo messaggio di aiuto<br>- info: Mostra informazioni sul sito<br>- commands: Elenca tutti i comandi disponibili";
-    terminal.appendChild(message);
-    terminal.style.height = 'auto';
-}
+
+
 
 
 
@@ -251,23 +275,6 @@ function updateProgress() {
     setTimeout(update, 1000);
 }
 
-
-
-// Attiva la funzione typeText quando l'elemento .terminal è visibile
-
-window.addEventListener('scroll', handleScroll);
-
-function handleScroll() {
-    const terminal = document.querySelector('.terminal');
-    const windowHeight = window.innerHeight;
-    const terminalTop = terminal.getBoundingClientRect().top;
-    const elementVisible = 120;
-
-    if (terminalTop < windowHeight - elementVisible) {
-        typeText();
-        window.removeEventListener('scroll', handleScroll);
-    } 
-}
 
 
 // Attiva la funzione updateProgress quando l'elemento .terminal2 è visibile

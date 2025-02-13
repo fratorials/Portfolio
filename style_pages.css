@@ -1,3 +1,11 @@
+@font-face {
+    font-family: 'Montserrat';
+    src: url('https://whoisfra.it/fonts/Montserrat-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900; /* Imposta l'intervallo di pesi supportati */
+    font-style: normal;
+    font-display: swap; /* Ottimizza il caricamento del font */
+  }
+
 body {
     background-color: black;
     width: 100%;
@@ -239,16 +247,25 @@ h2 {
     color: #fff;
     font-size: xx-large;
     height: fit-content;
-    margin-top: 80px;
+    margin-top: 100px;
 }
 
-p {
+body p{
     color: #fff;
     font-size: larger;
+    margin-left: 25px;
+}
+
+header p{
+    margin-left: 0px;
 }
 
 
-
+h3 {
+    color: #fff;
+    font-size: x-large;
+    margin-top: 50px;
+}
 
 
 .contatti {
@@ -262,6 +279,10 @@ p {
 .contatti h3 {
     font-size: 3rem;
     margin-bottom: 20px;
+}
+
+.cookie {
+    margin-top: 50px;
 }
 
 .cmd-content p {

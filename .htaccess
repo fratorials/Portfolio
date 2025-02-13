@@ -1,0 +1,26 @@
+RewriteEngine on
+
+RewriteCond %{THE_REQUEST} /([^.]+)\.html [NC]
+RewriteRule ^ /%1 [NC,L,R]
+
+RewriteCond %{REQUEST_FILENAME}.html -f
+RewriteRule ^ %{REQUEST_URI}.html [NC,L]
+
+RewriteCond %{THE_REQUEST} /([^.]+)\#skills [NC]
+RewriteRule ^ /%1 [NC,L,R]
+
+RewriteCond %{REQUEST_FILENAME}#skills -f
+RewriteRule ^ %{REQUEST_URI}#skills [NC,L]
+
+RewriteCond %{THE_REQUEST} /([^.]+)\#contatti [NC]
+RewriteRule ^ /%1 [NC,L,R]
+
+RewriteCond %{REQUEST_FILENAME}#contatti -f
+RewriteRule ^ %{REQUEST_URI}#contatti [NC,L]
+
+RewriteCond %{THE_REQUEST} /([^.]+)\#curriculum [NC]
+RewriteRule ^ /%1 [NC,L,R]
+
+RewriteCond %{REQUEST_FILENAME}#curriculum -f
+RewriteRule ^ %{REQUEST_URI}#curriculum [NC,L]
+
