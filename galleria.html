@@ -1,10 +1,10 @@
 <html>
     <head>
         <title>Francesco Mariani - Galleria</title>
-        <link rel="stylesheet" href="style_gallery.css">
+        <link rel="stylesheet" href="style.css">
         <link rel="stylesheet" href="fonts.css">
         <link rel="preconnect" href="https://whoisfra.it">
-        <script src="script_gallery.js"></script>
+        <script src="script_pag.js"></script>
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta charset="UTF-8">
     </head>
@@ -17,53 +17,65 @@
             <span class="menu-toggle">&#9776;</span>
             <ul>
                 <li><a href="https://whoisfra.it/">Home</a></li>
-                <li><a href="https://whoisfra.it/#skills">Skills</a></li>
-                <li><a href="https://whoisfra.it/#curriculum">Curriculum</a></li>
+                <li><a href="https://whoisfra.it/blog">Blog</a></li>
                 <li><a href="https://whoisfra.it/galleria">Galleria</a></li>
-                <li><a href="https://whoisfra.it/#contatti">Contatti</a></li>
             </ul>
         </header>
         
-        <div class="centra">
-            <div class="galleria">
-                <div class="cartella">
-                    <img src="./img/cartella_chiusa.png" alt="Cartella 1">
-                    <div class="immagini">
-                        <div class="immagini">
-                            <img src="immagine1.jpg" alt="Immagine 1">
-                            <img src="immagine2.jpg" alt="Immagine 2">
-                          </div>
+        <div class="explorer-window">
+            <div class="title-bar">
+                <img src="img/icona-cartella.png" alt="Icona Cartella" class="title-icon"> <span class="title-text">Galleria - Esplora File</span>
+                <div class="window-controls">
+                    <button class="control-btn minimize">_</button>
+                    <button class="control-btn maximize">□</button>
+                    <button class="control-btn close">X</button>
+                </div>
+            </div>
+            <div class="address-bar">
+                <button class="nav-btn back-btn" disabled>&larr;</button> <button class="nav-btn forward-btn" disabled>&rarr;</button> <button class="nav-btn up-btn">&uarr;</button> <input type="text" class="path-input" value="Galleria" readonly>
+            </div>
+            <div class="main-area" id="file-explorer-content">
+                <div class="icon" data-type="folder" data-path="Galleria/ProgettiGrafici">
+                    <img src="img/icona-cartella-grande.png" alt="Cartella"> <span>Progetti Grafici</span>
+                </div>
+                <div class="icon" data-type="folder" data-path="Galleria/Fotografie">
+                    <img src="img/icona-cartella-grande.png" alt="Cartella">
+                    <span>Fotografie</span>
+                </div>
+                 <div class="icon" data-type="folder" data-path="Galleria/WebDesign">
+                    <img src="img/icona-cartella-grande.png" alt="Cartella">
+                    <span>Web Design</span>
+                </div>
+                </div>
+            <div class="status-bar">
+                <span id="item-count">3 elementi</span> <span></span> </div>
+        </div>
+        
+        <div id="photo-viewer-modal" class="modal" style="display: none;">
+            <div class="modal-content photo-viewer-window">
+                 <div class="title-bar photo-title-bar">
+                    <img src="img/icona-foto.png" alt="Icona Foto" class="title-icon"> <span class="title-text" id="photo-title">Foto</span>
+                    <div class="window-controls">
+                        <button class="control-btn minimize">_</button>
+                        <button class="control-btn maximize">□</button>
+                        <button class="control-btn close" id="close-modal-btn">X</button>
                     </div>
-                  </div>
-
-                  <div class="cartella">
-                    <img src="./img/cartella_chiusa.png" alt="Cartella 1">
-                    <div class="immagini">
-                        <div class="immagini">
-                            <img src="immagine1.jpg" alt="Immagine 1">
-                            <img src="immagine2.jpg" alt="Immagine 2">
-                          </div>
-                    </div>
-                  </div>
-
-                  <div class="cartella">
-                    <img src="./img/cartella_chiusa.png" alt="Cartella 1">
-                    <div class="immagini">
-                        <div class="immagini">
-                            <img src="immagine1.jpg" alt="Immagine 1">
-                            <img src="immagine2.jpg" alt="Immagine 2">
-                          </div>
-                    </div>
-                  </div>
+                </div>
+                <div class="photo-area">
+                     <img id="modal-image" src="" alt="Immagine ingrandita">
+                </div>
+                <div class="photo-controls">
+                    <button id="prev-photo-btn">&lt; Precedente</button>
+                    <button id="next-photo-btn">Successivo &gt;</button>
+                </div>
             </div>
         </div>
-
         
         <footer>
             <center>
                 <p>2025 Francesco Mariani | <a href="https://whoisfra.it/privacypolicyandcookies">Informativa Cookies e Privacy</a></p>
             </center>
         </footer>
-        <script src="script_gallery.js"></script>
+        <script src="script_pag.js"></script>
     </body>
 </html>

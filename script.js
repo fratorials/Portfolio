@@ -5,10 +5,62 @@ console.log("Vuoi hackerarmi vero?");
 
 
 document.addEventListener("DOMContentLoaded", function() {
+
+    // --- Logica Cookie Consent ---
+    const cookieBanner = document.getElementById('cookie-consent-banner');
+    const acceptBtn = document.getElementById('accept-cookies-btn');
+    const declineBtn = document.getElementById('decline-cookies-btn'); // Assicurati che l'ID esista nell'HTML
+
+    // Verifica se il consenso è già stato dato/rifiutato
+    const consentGiven = localStorage.getItem('cookie_consent_given');
+    const consentDeclined = localStorage.getItem('cookie_consent_declined');
+
+    // Se non c'è né consenso né rifiuto, mostra il banner
+    if (!consentGiven && !consentDeclined && cookieBanner) {
+        cookieBanner.style.display = 'flex'; // Mostra il banner (usa 'flex' se usi flexbox nel CSS)
+    }
+
+    // Event listener per il bottone "Accetta"
+    if (acceptBtn) {
+        acceptBtn.addEventListener('click', () => {
+            // Salva il consenso in localStorage
+            localStorage.setItem('cookie_consent_given', 'true');
+            // Rimuovi eventuale stato di rifiuto precedente
+            localStorage.removeItem('cookie_consent_declined');
+            // Nascondi il banner
+            if (cookieBanner) {
+                cookieBanner.style.display = 'none';
+            }
+            // Qui potresti caricare script che dipendono dal consenso (es. Analytics)
+            // loadAnalyticsScript();
+            console.log("Consenso cookie accettato.");
+        });
+    }
+
+    // Event listener per il bottone "Rifiuta" (se esiste)
+    if (declineBtn) {
+        declineBtn.addEventListener('click', () => {
+            // Salva il rifiuto in localStorage
+            localStorage.setItem('cookie_consent_declined', 'true');
+             // Rimuovi eventuale stato di consenso precedente
+            localStorage.removeItem('cookie_consent_given');
+            // Nascondi il banner
+            if (cookieBanner) {
+                cookieBanner.style.display = 'none';
+            }
+            // Assicurati che script non essenziali non vengano caricati
+            console.log("Consenso cookie rifiutato.");
+        });
+    }
+
     setTimeout(function() {
         var element = document.querySelector(".avvio");
         element.style.opacity = "1";
     }, 1000);
+
+
+    
+
 
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('header ul');

@@ -22,7 +22,7 @@ body {
 
 
 .avvio {
-    opacity: 0;
+
     transition: opacity 1s;
   }
 
@@ -49,6 +49,136 @@ body {
     transform: translateY(0);
     opacity: 1;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/* --- Media Queries per Responsività Galleria --- */
+
+/* ----- Stili per Tablet e Schermi Medi (fino a 768px) ----- */
+@media (max-width: 768px) {
+
+    .explorer-window {
+        width: 95%; /* Occupa più larghezza */
+        height: 90vh; /* Altezza relativa alla viewport, più flessibile */
+        min-height: 500px; /* Altezza minima */
+        margin: 20px auto; /* Margine ridotto */
+        font-size: 0.9em; /* Riduci leggermente la dimensione base del font */
+    }
+
+    .main-area {
+        padding: 10px;
+        gap: 15px; /* Spazio ridotto tra le icone */
+    }
+
+    .icon {
+        width: 70px; /* Icone leggermente più piccole */
+    }
+
+    .icon img {
+        width: 40px; /* Immagine icona più piccola */
+        height: 40px;
+    }
+
+    .icon span {
+        font-size: 0.75em; /* Testo icona più piccolo */
+    }
+
+    .address-bar .path-input {
+        font-size: 0.85em; /* Testo barra indirizzi più piccolo */
+    }
+
+    /* Adattamenti Modale Foto */
+    .modal-content.photo-viewer-window {
+        width: 95%;
+        height: 90%;
+    }
+
+    .photo-controls button {
+        padding: 6px 10px; /* Pulsanti modale leggermente più piccoli */
+        margin: 0 5px;
+        font-size: 0.9em;
+    }
+}
+
+
+/* ----- Stili per Telefoni (fino a 480px) ----- */
+@media (max-width: 480px) {
+     .address-bar .path-input {
+         /* Potrebbe essere necessario ridurlo o nasconderlo */
+         /* Esempio: */
+         /* display: none; */ /* Oppure: */
+         width: 50%;
+         overflow: hidden; /* Nascondi testo che non entra */
+         white-space: nowrap;
+         text-overflow: ellipsis; /* Mostra ... per testo lungo */
+     }
+      .status-bar {
+        font-size: 0.75em; /* Testo barra stato più piccolo */
+        padding: 2px 5px;
+    }
+
+
+    .main-area {
+        padding: 8px;
+        gap: 10px; /* Spazio icone ancora ridotto */
+    }
+
+    .icon {
+        width: 65px; /* Icone ancora più piccole */
+    }
+
+    .icon img {
+        width: 35px; /* Immagine icona più piccola */
+        height: 35px;
+    }
+
+     .icon span {
+        font-size: 0.7em; /* Testo icona piccolo */
+     }
+
+
+    /* Adattamenti Modale Foto per schermi molto piccoli */
+     .modal-content.photo-viewer-window {
+        width: 100%;
+        height: 100%;
+        border-radius: 0;
+        border: none;
+    }
+
+     .photo-title-bar .title-text {
+         font-size: 0.9em; /* Testo titolo modale più piccolo */
+     }
+
+     .photo-controls {
+         padding: 5px;
+     }
+
+    .photo-controls button {
+        padding: 5px 8px;
+        margin: 0 3px;
+        font-size: 0.8em;
+        /* Potresti anche mostrare solo icone invece di testo */
+        /* Esempio: */
+        /* content: '<'; font-size: 1.2em; */
+    }
+}
+
+
+
+
+
+
+
+
 
 
 
@@ -522,3 +652,485 @@ footer h2{
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+/* Stili Finestra Esplora File */
+/* --- Modifiche per Finestra Movibile --- */
+
+.explorer-window {
+
+    position: absolute; /* O 'fixed' se la vuoi fissa rispetto alla finestra del browser */
+    /* Imposta dimensioni e posizione iniziale */
+    width: 800px; /* Larghezza iniziale fissa */
+    height: 550px; /* Altezza iniziale fissa */
+    top: 120px;  /* Posizione iniziale dall'alto */
+    left: calc(50% - 400px); /* Posizione iniziale orizzontale (centrata) */
+    max-width: 95%; /* Limite per schermi piccoli */
+    max-height: 90%;/* Limite per schermi piccoli */
+
+    /* Assicurati che queste proprietà siano ancora presenti: */
+    background-color: #f0f0f0;
+    border: 1px solid #a0a0a0;
+    border-radius: 5px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden; /* Mantiene l'overflow hidden */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    z-index: 990; /* Assicurati che sia sopra altri elementi ma sotto la modale foto */
+}
+
+.title-bar {
+    /* Rimuovi 'cursor: grab;' se presente, lo gestirà JS */
+    /* Assicurati che queste siano presenti: */
+    background: linear-gradient(to bottom, #e0e0e0, #c0c0c0);
+    padding: 5px 8px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #a0a0a0;
+    user-select: none; /* Impedisce la selezione del testo durante il drag */
+    cursor: grab; /* Cursore iniziale per il trascinamento */
+}
+
+/* Stile opzionale mentre si trascina */
+.explorer-window.dragging .title-bar {
+    cursor: grabbing;
+}
+
+/* Rimuovi o modifica le regole @media che impostavano width/height/margin
+   per .explorer-window se entrano in conflitto con position:absolute.
+   Potresti dover aggiustare top/left/width/height dentro le media query
+   per posizionare/dimensionare la finestra su schermi piccoli. */
+
+/* Esempio di adattamento in @media (max-width: 480px) */
+@media (max-width: 480px) {
+    .explorer-window {
+        width: 98%;
+        height: 85vh; /* Altezza ancora relativa */
+        top: 65px; /* Più vicino all'header */
+        left: 1%;
+        max-width: 98%;
+        max-height: calc(100vh - 70px);
+        border: none; /* Nascondi bordo se full-width */
+        border-radius: 0;
+    }
+    /* ... altre regole @media ... */
+}
+
+.title-bar {
+    background: linear-gradient(to bottom, #e0e0e0, #c0c0c0); /* Gradiente per barra titolo */
+    padding: 5px 8px;
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #a0a0a0;
+    cursor: grab; /* Simula trascinamento */
+}
+
+.title-icon {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+}
+
+.title-text {
+    flex-grow: 1; /* Occupa spazio disponibile */
+    font-weight: bold;
+    font-size: 0.9em;
+    color: #333;
+}
+
+.window-controls {
+    display: flex;
+}
+
+.control-btn {
+    background-color: #d0d0d0;
+    border: 1px solid #a0a0a0;
+    margin-left: 3px;
+    padding: 0px 8px;
+    font-size: 0.8em;
+    font-weight: bold;
+    cursor: pointer;
+}
+.control-btn.close {
+    background-color: #e81123; /* Rosso per chiudi */
+    color: white;
+    border-color: #e81123;
+}
+.control-btn:hover {
+    filter: brightness(1.1);
+}
+.control-btn.close:hover {
+     background-color: #f1707a;
+}
+
+
+.address-bar {
+    background-color: #f0f0f0;
+    padding: 5px;
+    border-bottom: 1px solid #d0d0d0;
+    display: flex;
+    align-items: center;
+}
+
+.nav-btn {
+    background: none;
+    border: 1px solid transparent;
+    font-size: 1.2em;
+    margin-right: 5px;
+    padding: 2px 5px;
+    cursor: pointer;
+}
+.nav-btn:hover {
+    background-color: #e0e0e0;
+    border-color: #c0c0c0;
+}
+.nav-btn:disabled {
+    color: #a0a0a0;
+    cursor: default;
+}
+.nav-btn:disabled:hover {
+    background: none;
+    border-color: transparent;
+}
+
+.path-input {
+    flex-grow: 1;
+    border: 1px solid #ccc;
+    padding: 3px 5px;
+    font-size: 0.9em;
+    margin-left: 10px;
+    background-color: white; /* Input modificabile */
+}
+
+
+.main-area {
+    flex-grow: 1; /* Occupa lo spazio verticale rimanente */
+    background-color: #ffffff; /* Sfondo bianco area file */
+    padding: 15px;
+    overflow-y: auto; /* Scroll se il contenuto è troppo */
+    display: flex;
+    flex-wrap: wrap; /* Manda a capo le icone */
+    align-content: flex-start; /* Allinea icone in alto */
+    gap: 20px; /* Spazio tra le icone */
+}
+
+.icon {
+    display: flex;
+    flex-direction: column; /* Immagine sopra, testo sotto */
+    align-items: center; /* Centra orizzontalmente */
+    text-align: center;
+    width: 80px; /* Larghezza fissa per icona */
+    padding: 5px;
+    cursor: pointer;
+    border: 1px solid transparent;
+    border-radius: 3px;
+}
+
+.icon:hover {
+    background-color: #e6f2ff; /* Sfondo azzurrino su hover */
+    border-color: #cce4ff;
+}
+
+.icon img {
+    width: 48px; /* Dimensione icona grande */
+    height: 48px;
+    margin-bottom: 5px;
+}
+
+.icon span {
+    font-size: 0.8em;
+    word-wrap: break-word; /* Manda a capo testo lungo */
+    width: 100%;
+}
+
+.status-bar {
+    background-color: #f0f0f0;
+    padding: 3px 10px;
+    border-top: 1px solid #d0d0d0;
+    font-size: 0.8em;
+    color: #555;
+    display: flex;
+    justify-content: space-between;
+}
+
+
+/* Stili Finestra Modale Foto */
+.modal {
+    position: fixed; /* Fissata rispetto alla viewport */
+    z-index: 1000; /* Sopra tutto il resto */
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Sfondo scuro semi-trasparente */
+    display: flex; /* Usa flexbox per centrare */
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content.photo-viewer-window {
+    background-color: #2d2d2d; /* Sfondo scuro per app foto */
+    color: white;
+    width: 90%;
+    max-width: 1000px;
+    height: 85%;
+    max-height: 800px;
+    border-radius: 5px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.photo-title-bar {
+     background: #1c1c1c; /* Barra titolo più scura */
+     color: #e0e0e0;
+     border-bottom: 1px solid #444;
+}
+.photo-title-bar .title-text {
+    color: #e0e0e0;
+}
+.photo-title-bar .control-btn {
+     background-color: #444;
+     border-color: #666;
+     color: #e0e0e0;
+}
+.photo-title-bar .control-btn.close {
+    background-color: #e81123; color: white; border-color: #e81123;
+}
+.photo-title-bar .control-btn.close:hover {
+    background-color: #f1707a;
+}
+
+
+.photo-area {
+    flex-grow: 1; /* Occupa spazio verticale */
+    display: flex;
+    justify-content: center; /* Centra immagine orizzontalmente */
+    align-items: center; /* Centra immagine verticalmente */
+    padding: 10px;
+    overflow: hidden; /* Per immagini molto grandi */
+}
+
+#modal-image {
+    max-width: 100%; /* Immagine non più larga dell'area */
+    max-height: 100%; /* Immagine non più alta dell'area */
+    display: block;
+}
+
+.photo-controls {
+    padding: 10px;
+    text-align: center;
+    border-top: 1px solid #444;
+}
+.photo-controls button {
+    background-color: #444;
+    color: white;
+    border: 1px solid #666;
+    padding: 8px 15px;
+    margin: 0 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.photo-controls button:hover {
+    background-color: #555;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Aggiungi questo al tuo style.css */
+
+.blog-section {
+    /* Stili per l'intera sezione del blog */
+    color: #e0e0e0;
+}
+
+.blog-section h2 {
+    color: #ffffff;
+    font-size: 2.8rem; /* O la dimensione che preferisci */
+    margin-bottom: 30px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid red; /* Mantiene lo stile del sito */
+}
+
+#blog-posts-container {
+    /* Contenitore dei post */
+    margin-top: 20px;
+}
+
+#blog-posts-container p { /* Stile per messaggi di caricamento/errore */
+    color: #cccccc;
+    font-style: italic;
+}
+
+.blog-post-item {
+    background-color: #1f1f1f; /* Sfondo scuro per ogni post */
+    padding: 20px;
+    margin-bottom: 25px;
+    border-left: 5px solid red; /* Bordo distintivo */
+    border-radius: 0 5px 5px 0; /* Angoli arrotondati (tranne a sinistra) */
+    transition: background-color 0.3s ease;
+}
+
+.blog-post-item:hover {
+     background-color: #2a2a2a; /* Leggero cambio colore su hover */
+}
+
+
+.blog-post-item a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 1.5rem; /* Dimensione titolo post */
+    font-weight: 600;
+    display: block; /* Occupa tutta la larghezza */
+    margin-bottom: 10px;
+    transition: color 0.3s ease;
+}
+
+.blog-post-item a:hover {
+    color: #ff6666; /* Rosso più chiaro su hover */
+}
+
+.blog-post-metadata {
+    display: flex;
+    align-items: center; /* Allinea icona e data verticalmente */
+    gap: 10px; /* Spazio tra icona e data */
+    margin-top: 10px;
+}
+
+.blog-post-metadata .file-icon {
+    width: 16px; /* Dimensione piccola per l'icona */
+    height: 16px;
+}
+
+.blog-post-metadata .post-date {
+    color: #a0a0a0; /* Colore grigio per la data */
+    font-size: 0.9em;
+}
+
+
+
+
+
+
+
+/* Stili per il Cookie Consent Banner */
+.cookie-banner {
+    position: fixed; /* Fisso in basso */
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #252525; /* Sfondo scuro, coerente col tuo stile */
+    color: #e0e0e0;
+    padding: 15px 25px;
+    box-shadow: 0 -2px 5px rgba(0,0,0,0.5);
+    z-index: 1001; /* Assicurati sia sopra altri elementi fissi, ma sotto eventuali modali aperte se necessario */
+    
+    font-size: 0.9em;
+    box-sizing: border-box; /* Include padding nella larghezza */
+    align-items: center; /* Centra verticalmente se usi flex */
+    justify-content: space-between; /* Spazio tra testo e bottoni se usi flex */
+}
+
+/* Usa flexbox per layout responsivo (opzionale ma consigliato) */
+.cookie-banner { /* <<< REGOLE CONFLITTUANTI */
+    display: flex; /* Cambia da none a flex quando mostrato da JS */
+    flex-wrap: wrap; /* Permette ai bottoni di andare sotto su schermi piccoli */
+    gap: 15px; /* Spazio tra testo e bottoni */
+}
+
+
+.cookie-banner p {
+    margin: 0; /* Rimuovi margini default del paragrafo */
+    flex-grow: 1; /* Il testo occupa lo spazio disponibile */
+    color: #e0e0e0; /* Assicura colore testo */
+    font-size: 1em; /* Reset per coerenza */
+    margin-left: 0; /* Sovrascrivi stile globale se necessario */
+    line-height: 1.4;
+}
+
+.cookie-banner a {
+    color: #ff6666; /* Rosso chiaro per il link, stile sito */
+    text-decoration: underline;
+}
+
+.cookie-banner a:hover {
+    color: #ffffff;
+}
+
+.cookie-buttons {
+    /* Contenitore per i bottoni */
+    display: flex;
+    gap: 10px; /* Spazio tra i bottoni */
+    flex-shrink: 0; /* Evita che i bottoni si restringano troppo */
+}
+
+.cookie-banner button {
+    background-color: red; /* Rosso stile sito */
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.cookie-banner button:hover {
+    background-color: #cc0000; /* Rosso più scuro su hover */
+}
+
+/* Stile specifico per bottone Rifiuta (opzionale) */
+.cookie-banner button#decline-cookies-btn {
+    background-color: #555;
+}
+
+.cookie-banner button#decline-cookies-btn:hover {
+    background-color: #777;
+}
+
+/* Media Query per schermi piccoli */
+@media (max-width: 768px) {
+    .cookie-banner {
+        flex-direction: column; /* Testo sopra, bottoni sotto */
+        align-items: flex-start; /* Allinea a sinistra */
+        text-align: center;
+    }
+     .cookie-banner p {
+         margin-bottom: 10px; /* Spazio tra testo e bottoni */
+         text-align: center;
+    }
+    .cookie-buttons {
+        width: 100%; /* Bottoni a tutta larghezza */
+        justify-content: center; /* Centra i bottoni */
+    }
+}
