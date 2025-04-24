@@ -1,0 +1,202 @@
+/* Foglio di stile per privacypolicyandcookies.html */
+
+/* --- Reset e Stili Base --- */
+body {
+    font-family: 'Arial', sans-serif; /* Un font standard molto leggibile */
+    line-height: 1.6; /* Maggiore interlinea per leggibilità */
+    color: #333; /* Testo scuro su sfondo chiaro */
+    background-color: #f8f8f8; /* Sfondo leggermente grigio */
+    margin: 0;
+    padding: 0;
+}
+
+/* --- Contenitore Principale --- */
+.centra {
+    max-width: 900px; /* Larghezza massima per leggibilità del testo */
+    margin: 20px auto; /* Centra il contenuto con margine sopra/sotto */
+    padding: 20px 30px; /* Padding interno */
+    background-color: #ffffff; /* Sfondo bianco per il contenuto */
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); /* Ombra leggera */
+    box-sizing: border-box; /* Include padding/border nella larghezza/altezza */
+}
+
+/* --- Header (Stile minimale se mantenuto) --- */
+header {
+    padding: 10px 0;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    text-align: center; /* Centra il logo/titolo */
+}
+
+header a {
+    text-decoration: none;
+    color: #1a1a1a;
+    font-weight: bold;
+}
+
+header .hacker-text-title { /* Semplifichiamo il nome del sito */
+    font-family: 'Arial', sans-serif;
+    font-size: 1.8em;
+    color: #1a1a1a;
+    display: inline; /* Mantiene su una linea se breve */
+}
+header .it {
+    color: #cc0000; /* Manteniamo il rosso per .it */
+    font-size: 1.8em;
+    display: inline;
+}
+
+/* Nascondiamo menu hamburger e lista link non necessari qui */
+header .menu-toggle, header ul {
+    display: none;
+}
+
+
+/* --- Sezione Hero Policy --- */
+.hero-policy {
+    text-align: center;
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+.hero-policy h1 {
+    font-size: 2.5em; /* Dimensione del titolo principale */
+    color: #1a1a1a; /* Colore scuro */
+    margin-bottom: 10px;
+     /* Rimuoviamo l'effetto gradiente per leggibilità */
+    background-image: none;
+    -webkit-background-clip: unset;
+    background-clip: unset;
+}
+
+/* --- Titoli e Paragrafi --- */
+h2 {
+    font-size: 1.8em;
+    color: #cc0000; /* Rosso per i titoli di sezione */
+    margin-top: 30px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+h3 {
+    font-size: 1.3em;
+    color: #333;
+    margin-top: 25px;
+    margin-bottom: 10px;
+}
+
+p {
+    margin-bottom: 15px;
+    color: #555; /* Grigio scuro per il testo principale */
+}
+
+a {
+    color: #0066cc; /* Blu standard per i link */
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* --- Sezione Contatti (Stile semplificato) --- */
+#contatti {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #f0f0f0; /* Sfondo grigio chiaro */
+    border-top: 1px solid #ddd;
+    color: #333;
+    font-family: 'Courier New', Courier, monospace; /* Manteniamo monospace se voluto */
+}
+
+#contatti .cmd-content p {
+    font-size: 1em; /* Dimensione testo normale */
+    margin: 8px 0;
+    color: #333;
+}
+
+#contatti a {
+    color: #0066cc; /* Link blu */
+}
+
+#contatti a:hover {
+    color: #004c99; /* Blu più scuro su hover */
+}
+
+/* --- Footer --- */
+footer {
+    margin-top: 30px;
+    padding: 15px 0;
+    text-align: center;
+    border-top: 1px solid #eee;
+    font-size: 0.9em;
+    color: #777;
+}
+
+footer a {
+    color: #555; /* Grigio scuro per link footer */
+}
+
+footer a:hover {
+    color: #000;
+}
+
+/* --- Media Queries per Responsività --- */
+
+/* Tablet e schermi medi */
+@media (max-width: 768px) {
+    .centra {
+        width: 95%; /* Usa più larghezza disponibile */
+        padding: 15px 20px;
+        margin: 15px auto;
+    }
+
+    .hero-policy h1 {
+        font-size: 2em;
+    }
+
+    h2 {
+        font-size: 1.6em;
+    }
+
+    h3 {
+        font-size: 1.2em;
+    }
+}
+
+/* Telefoni */
+@media (max-width: 480px) {
+    body {
+        font-size: 15px; /* Aumenta leggermente la base font per mobile */
+    }
+
+    .centra {
+        width: 100%;
+        padding: 10px 15px;
+        margin: 0; /* Rimuovi margini laterali */
+        box-shadow: none; /* Rimuovi ombra su mobile */
+        border-radius: 0; /* Rimuovi angoli arrotondati */
+    }
+
+     header .hacker-text-title, header .it {
+        font-size: 1.5em;
+    }
+
+    .hero-policy h1 {
+        font-size: 1.8em;
+    }
+
+    h2 {
+        font-size: 1.4em;
+    }
+
+    h3 {
+        font-size: 1.1em;
+    }
+
+    #contatti .cmd-content p {
+        font-size: 0.95em;
+    }
+}

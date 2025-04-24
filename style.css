@@ -1043,6 +1043,129 @@ footer h2{
 
 
 
+
+
+/* --- Sovrascritture Specifiche per Pagina Privacy --- */
+
+/* Contenitore del testo della policy */
+.policy-text-container {
+    color: #e0e0e0; /* Testo principale un po' più chiaro per contrasto su nero */
+    margin-top: 30px; /* Spazio dopo l'hero H1 */
+}
+
+/* Paragrafi nella policy */
+.policy-text-container p {
+    line-height: 1.7; /* Aumenta interlinea per blocchi di testo lunghi */
+    font-size: 1rem; /* Assicura una dimensione leggibile */
+    color: #cccccc; /* Grigio chiaro, ma non bianco puro */
+    margin-bottom: 1.2em; /* Spazio tra paragrafi */
+}
+
+/* Titoli H2 nella policy */
+.policy-text-container h2 {
+    color: red; /* Mantiene il rosso distintivo */
+    font-size: 1.8rem; /* Dimensione adeguata */
+    margin-top: 2.5em; /* Più spazio sopra H2 */
+    margin-bottom: 1em;
+    border-bottom: 1px solid #444; /* Linea separatrice sottile */
+    padding-bottom: 0.3em;
+}
+/* Rimuovi margine extra se H2 è il primo elemento nel container */
+.policy-text-container h2:first-child {
+     margin-top: 0;
+}
+
+
+/* Titoli H3 nella policy */
+.policy-text-container h3 {
+    color: #f0f0f0; /* Quasi bianco per i sottotitoli */
+    font-size: 1.3rem;
+    margin-top: 1.5em;
+    margin-bottom: 0.8em;
+}
+
+/* Link dentro la policy */
+.policy-text-container a {
+    color: #ff6666; /* Rosso chiaro per i link, come nel banner cookie */
+    text-decoration: underline;
+}
+.policy-text-container a:hover {
+    color: #ffffff;
+}
+
+/* Riduci effetto gradiente su H1 solo per questa pagina se disturba */
+.hero-policy h1 {
+        background-image: linear-gradient(-45deg, #ee1b1b, #e52c2c, #5e23d5, #234fd5);
+        animation: gradient 5s ease infinite;
+        background-clip: text;
+        -webkit-background-clip: text;
+        background-size: 150% 200%;
+        color: #E5E5E5;
+        transition: 2000ms;
+             /* Meglio: aggiustiamo solo la dimensione per mobile */
+        font-size: 3rem; /* Dimensione base per H1 policy */
+        line-height: 1.2;
+        text-align: center; /* Centra l'H1 nella policy */
+        float: none; /* Rimuovi float se presente */
+}
+    
+.hero-policy h1:hover{
+        color: transparent;
+        transition: 400ms;
+}
+
+
+
+
+/* --- Media Queries Specifiche per Policy --- */
+
+@media (max-width: 768px) {
+    .policy-text-container p {
+        font-size: 0.95rem;
+        line-height: 1.6;
+    }
+    .policy-text-container h2 {
+        font-size: 1.6rem;
+    }
+    .policy-text-container h3 {
+        font-size: 1.2rem;
+    }
+     .hero-policy h1 {
+         font-size: 2.5rem; /* Riduci H1 su tablet */
+     }
+}
+
+@media (max-width: 480px) {
+    .policy-text-container {
+         padding: 0 10px; /* Aggiungi un po' di padding laterale su mobile */
+    }
+    .policy-text-container p {
+        font-size: 0.9rem;
+    }
+    .policy-text-container h2 {
+        font-size: 1.4rem;
+    }
+    .policy-text-container h3 {
+        font-size: 1.1rem;
+    }
+    .hero-policy h1 {
+         font-size: 2rem; /* Riduci ulteriormente H1 su mobile */
+         line-height: 1.3;
+     }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 /* Stili per il Cookie Consent Banner */
 .cookie-banner {
     position: fixed; /* Fisso in basso */
@@ -1092,6 +1215,16 @@ footer h2{
     display: flex;
     gap: 10px; /* Spazio tra i bottoni */
     flex-shrink: 0; /* Evita che i bottoni si restringano troppo */
+}
+
+footer #change-cookie-consent {
+    color: #aaaaaa; /* Grigio chiaro */
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+footer #change-cookie-consent:hover {
+    color: #ffffff; /* Bianco su hover */
 }
 
 .cookie-banner button {

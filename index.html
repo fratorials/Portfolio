@@ -19,7 +19,7 @@
             <span class="menu-toggle">&#9776;</span>
             <ul>
                 <li><a href="https://whoisfra.it/">Home</a></li>
-                <li><a href="#skills">Skills</a></li>
+                <li><a href="#chisono">Chi sono</a></li>
                 <li><a href="#curriculum">Curriculum</a></li>
                 <li><a href="https://whoisfra.it/galleria">Galleria</a></li>
                 <li><a href="https://whoisfra.it/blog">Blog</a></li>
@@ -35,7 +35,7 @@
                 </div>
             </div>
         
-            <div class="cybersec">
+            <div id="chisono" class="cybersec">
                 <h2 class="hacker-text" data-original="Chi sono">Chi sono</h2>
                 <div class="terminal">
                     <span id="output"></span>
@@ -74,22 +74,25 @@
             </div>
         </div>
 
-        <div id="cookie-consent-banner" class="cookie-banner">
-            <p>
-                Questo sito utilizza cookie tecnici per funzionare. Potremmo usare anche cookie statistici anonimi per migliorare l'esperienza. Cliccando "Accetta", acconsenti al loro utilizzo. Per saperne di più, leggi la nostra
-                <a href="/privacypolicyandcookies.html" target="_blank">Informativa Cookies e Privacy</a>.
-                </p>
-            <div class="cookie-buttons">
-                    <button id="accept-cookies-btn">Accetta</button>
-                    <button id="decline-cookies-btn">Rifiuta</button>
-            </div>
+        <div id="cookie-consent-banner" class="cookie-banner" style="display: none;"> <p>
+            Questo sito utilizza cookie tecnici e strumenti simili (localStorage) per funzionare e gestire il tuo consenso. Interagisce inoltre con API di Google (per il Blog) che potrebbero usare propri cookie. Cliccando "Accetta", acconsenti all'uso di queste tecnologie. Per saperne di più o modificare le tue preferenze, leggi la nostra
+            <a href="/privacypolicyandcookies.html" target="_blank">Informativa Cookies e Privacy</a>.
+        </p>
+        <div class="cookie-buttons">
+            <button id="accept-cookies-btn">Accetta</button>
+            <button id="decline-cookies-btn">Rifiuta</button>
         </div>
+    </div>
 
-        <footer>
-            <center>
-                <p>2025 Francesco Mariani | <a href="https://whoisfra.it/privacypolicyandcookies">Informativa Cookies e Privacy</a></p>
-            </center>
-        </footer>
-        <script src="script.js"></script>
-    </body>
+    <footer>
+        <center>
+            <p>2025 Francesco Mariani | <a href="/privacypolicyandcookies.html">Informativa Cookies e Privacy</a></p>
+            <p style="font-size: 0.8em; margin-top: 5px;">
+                <a href="#" id="change-cookie-consent">Modifica preferenze cookie</a>
+            </p>
+             </center>
+    </footer>
+    <script src="script.js"></script> 
+    <script src="cookie-consent.js"></script> 
+</body>
 </html>

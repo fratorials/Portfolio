@@ -30,12 +30,30 @@
         </section>
     </div>
 
-    <footer>
-        <center>
-            <p>2025 Francesco Mariani | <a href="https://whoisfra.it/privacypolicyandcookies">Informativa Cookies e Privacy</a></p>
-        </center>
-    </footer>
+    <div id="cookie-consent-banner" class="cookie-banner" style="display: none;"> <p>
+        Questo sito utilizza cookie tecnici e strumenti simili (localStorage) per funzionare e gestire il tuo consenso. Interagisce inoltre con API di Google (per il Blog) che potrebbero usare propri cookie. Cliccando "Accetta", acconsenti all'uso di queste tecnologie. Per saperne di più o modificare le tue preferenze, leggi la nostra
+        <a href="/privacypolicyandcookies.html" target="_blank">Informativa Cookies e Privacy</a>.
+    </p>
+    <div class="cookie-buttons">
+        <button id="accept-cookies-btn">Accetta</button>
+        <button id="decline-cookies-btn">Rifiuta</button>
+    </div>
+</div>
+
+<footer>
+    <center>
+        <p>2025 Francesco Mariani | <a href="/privacypolicyandcookies.html">Informativa Cookies e Privacy</a></p>
+        <p style="font-size: 0.8em; margin-top: 5px;">
+            <a href="#" id="change-cookie-consent">Modifica preferenze cookie</a>
+        </p>
+         </center>
+</footer>
+<script src="script.js"></script> 
+<script src="cookie-consent.js"></script> 
+
+
 
     <script async defer src="https://apis.google.com/js/api.js" onload="gapi.load('client', startDriveApi)"></script>
     <script src="blog_script.js"></script>
+</body>
 </html>
