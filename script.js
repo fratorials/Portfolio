@@ -5,26 +5,60 @@ console.log("Vuoi hackerarmi vero?");
 
 
 document.addEventListener("DOMContentLoaded", function() {
+    // --- Fade-in iniziale (con controllo esistenza elemento) ---
     setTimeout(function() {
         var element = document.querySelector(".avvio");
-        element.style.opacity = "1";
+        if (element) { 
+            element.style.opacity = "1";
+        }
     }, 1000);
 
-
-    
-
+    // --- Gestione Menu Hamburger e Spostamento Finestra Galleria ---
     const menuToggle = document.querySelector('.menu-toggle');
     const nav = document.querySelector('header ul');
 
     if (menuToggle && nav) {
+        console.log("Menu toggle e nav trovati. Aggiungo listener."); // DEBUG
         menuToggle.addEventListener('click', () => {
+            console.log("--- Menu toggle CLICCATO ---"); // DEBUG
+
+            // Aggiunge o toglie la classe 'show' per mostrare/nascondere il menu
             nav.classList.toggle('show'); 
+            console.log(`Classe 'show' su nav ${nav.classList.contains('show') ? 'AGGIUNTA' : 'RIMOSSA'}.`); // DEBUG
+
+            // --- LOGICA SPOSTAMENTO FINESTRA ---
+            const explorerWindow = document.querySelector('.explorer-window');
+            
+            if (explorerWindow) {
+                 console.log("Finestra .explorer-window TROVATA."); // DEBUG
+            } else {
+                 console.log("Finestra .explorer-window NON trovata su questa pagina."); // DEBUG
+                 return; // Esci se la finestra non c'è
+            }
+
+            // Controlla se il menu è ora aperto
+            if (nav.classList.contains('show')) {
+                console.log("Menu è APERTO. Provo a spostare la finestra."); // DEBUG
+                const menuBottomPosition = 370; // Posizione calcolata
+                console.log(`Imposto explorerWindow.style.top a: ${menuBottomPosition}px`); // DEBUG
+                
+                // Applica il nuovo stile 'top' alla finestra explorer
+                explorerWindow.style.top = `${menuBottomPosition}px`; 
+                console.log(`Valore di explorerWindow.style.top ORA: ${explorerWindow.style.top}`); // DEBUG
+                
+            } else {
+                 console.log("Menu è CHIUSO."); // DEBUG
+                // OPZIONALE: Logica per riportare su la finestra (attualmente non attiva)
+                // console.log("Non riporto la finestra su automaticamente."); 
+            }
+            // --- FINE LOGICA SPOSTAMENTO FINESTRA ---
+
         });
     } else {
-        console.error('Pulsante menu rotto');
+         console.log("Menu toggle o nav non trovati all'avvio."); // DEBUG (Non dovrebbe succedere sulla galleria)
     }
-});
 
+}); // --- FINE BLOCCO DOMContentLoaded --- 
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -42,23 +76,40 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 
 
 
-window.addEventListener("scroll", reveal);
-
-function reveal() {
+window.addEventListener('scroll', handleScroll);
+// Funzione per effetto rivela allo scroll (più robusta)
+function handleScroll() { 
     var reveals = document.querySelectorAll(".rivela");
-  
+
+    // Se non ci sono elementi .rivela, esci subito
+    if (!reveals || reveals.length === 0) {
+        // console.log("handleScroll: Nessun elemento .rivela trovato, esco."); // Debug (opzionale)
+        return; 
+    }
+
+    var windowHeight = window.innerHeight;
+    var elementVisible = 120; 
+
     for (var i = 0; i < reveals.length; i++) {
-      var windowHeight = window.innerHeight;
-      var elementTop = reveals[i].getBoundingClientRect().top;
-      var elementVisible = 120;
-  
-      if (elementTop < windowHeight - elementVisible) {
-        reveals[i].classList.add("attivo");
-      } else {
-        reveals[i].classList.remove("attivo");
-      }
+        var currentElement = reveals[i]; // Metti l'elemento corrente in una variabile
+
+        // AGGIUNGI CONTROLLO CRITICO: Assicurati che l'elemento esista e sia un nodo valido prima di usarlo
+        if (!currentElement || typeof currentElement.getBoundingClientRect !== 'function') {
+             // console.log(`handleScroll: Elemento all'indice ${i} non valido, salto.`); // Debug (opzionale)
+             continue; // Salta al prossimo elemento del ciclo
+        }
+
+        // Ora possiamo usare getBoundingClientRect in sicurezza
+        var elementTop = currentElement.getBoundingClientRect().top; 
+
+        if (elementTop < windowHeight - elementVisible) {
+            currentElement.classList.add("attivo");
+        } else {
+            currentElement.classList.remove("attivo");
+        }
     }
 }
+
 
 function reveal2() {
     var reveals = document.querySelectorAll(".rivela_sotto");
@@ -78,48 +129,54 @@ function reveal2() {
 
 
 
-// Effetto crittografia testo
-  
-window.addEventListener("scroll", reveal2);
+// --- Effetto Crittografia Testo (con controllo esistenza elemento) ---
 
+// Effetto per elementi con classe .hacker-text
 const hackerText = document.querySelector('.hacker-text');
 
-hackerText.addEventListener('mouseover', () => {
-    const originalText = hackerText.dataset.original;
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-    console.log("Figo vero? Ora dai, cercalo sul codice javascript");
-    
-    let interval = setInterval(() => {
-        hackerText.innerText = originalText
-            .split('')
-            .map(letter => (Math.random() > 0.5 ? characters[Math.floor(Math.random() * characters.length)] : letter))
-            .join('');
-    }, 50);
+if (hackerText) { // Controlla se l'elemento esiste
+    hackerText.addEventListener('mouseover', () => {
+        const originalText = hackerText.dataset.original;
+        if (!originalText) return; // Esce se manca data-original
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+        console.log("Figo vero? Ora dai, cercalo sul codice javascript"); // Log originale
 
-    setTimeout(() => {
-        clearInterval(interval);
-        hackerText.innerText = originalText;
-    }, 1500);
-});
+        let interval = setInterval(() => {
+            hackerText.innerText = originalText
+                .split('')
+                .map(letter => (Math.random() > 0.5 ? characters[Math.floor(Math.random() * characters.length)] : letter))
+                .join('');
+        }, 50);
 
+        setTimeout(() => {
+            clearInterval(interval);
+            hackerText.innerText = originalText;
+        }, 1500); // Durata effetto
+    });
+} // Fine if (hackerText)
+
+// Effetto per elementi con classe .hacker-text-title (es. nell'header)
 const hackerTextt = document.querySelector('.hacker-text-title');
 
-hackerTextt.addEventListener('mouseover', () => {
-    const originalText = hackerTextt.dataset.original;
-    const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
-    
-    let interval = setInterval(() => {
-        hackerTextt.innerText = originalText
-            .split('')
-            .map(letter => (Math.random() > 0.5 ? characters[Math.floor(Math.random() * characters.length)] : letter))
-            .join('');
-    }, 50);
+if (hackerTextt) { // Controlla se l'elemento esiste
+    hackerTextt.addEventListener('mouseover', () => {
+        const originalText = hackerTextt.dataset.original;
+         if (!originalText) return; // Esce se manca data-original
+        const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+        
+        let interval = setInterval(() => {
+            hackerTextt.innerText = originalText
+                .split('')
+                .map(letter => (Math.random() > 0.5 ? characters[Math.floor(Math.random() * characters.length)] : letter))
+                .join('');
+        }, 50);
 
-    setTimeout(() => {
-        clearInterval(interval);
-        hackerTextt.innerText = originalText;
-    }, 1000);
-});
+        setTimeout(() => {
+            clearInterval(interval);
+            hackerTextt.innerText = originalText;
+        }, 1000); // Durata effetto
+    });
+} // Fine if (hackerTextt)
 
 
 
@@ -284,14 +341,32 @@ function updateProgress() {
 
 window.addEventListener('scroll', handleScrolll);
 
-function handleScrolll() {
-    const terminal2 = document.querySelector('.terminal2');
+// Funzione per attivare animazioni (es. terminale CV) quando visibili
+function handleScrolll() { 
+    // Seleziona l'elemento specifico (es. terminal2 per CV)
+    const terminal2 = document.querySelector('.terminal2'); 
+    
+    // AGGIUNGI CONTROLLO: Se l'elemento .terminal2 non esiste in questa pagina, esci
+    if (!terminal2) { 
+        return; 
+    }
+
+    // Se l'elemento esiste, procedi con la logica originale
     const windowHeight = window.innerHeight;
-    const terminal2Top = terminal2.getBoundingClientRect().top;
-    const elementVisible = 120;
+    // Ora è sicuro chiamare getBoundingClientRect perché terminal2 esiste
+    const terminal2Top = terminal2.getBoundingClientRect().top; 
+    const elementVisible = 120; // Soglia di visibilità
 
     if (terminal2Top < windowHeight - elementVisible) {
-        updateProgress();
-        window.removeEventListener('scroll', handleScrolll);
+        // Chiama la funzione che fa partire l'animazione (es. updateProgress)
+        // Assicurati che anche updateProgress() controlli se i suoi elementi esistono!
+        if (typeof updateProgress === 'function') { // Controlla se la funzione esiste
+             updateProgress(); 
+        }
+        // Rimuovi il listener se l'animazione deve partire solo una volta
+        window.removeEventListener('scroll', handleScrolll); 
     }
 }
+
+// Assicurati che l'event listener nel tuo script usi questo nome di funzione:
+// window.addEventListener('scroll', handleScrolll);

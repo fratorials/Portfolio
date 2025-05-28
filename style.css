@@ -688,6 +688,7 @@ footer h2{
     overflow: hidden; /* Mantiene l'overflow hidden */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     z-index: 990; /* Assicurati che sia sopra altri elementi ma sotto la modale foto */
+    transition: top 0.3s ease-in-out; /* Transizione per il movimento */
 }
 
 .title-bar {
@@ -717,7 +718,6 @@ footer h2{
     .explorer-window {
         width: 98%;
         height: 85vh; /* Altezza ancora relativa */
-        top: 65px; /* Più vicino all'header */
         left: 1%;
         max-width: 98%;
         max-height: calc(100vh - 70px);
