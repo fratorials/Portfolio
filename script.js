@@ -183,106 +183,183 @@ if (hackerTextt) { // Controlla se l'elemento esiste
 //Terminale interattivo
 
 const terminal = document.querySelector('.terminal');
-const output = document.getElementById('output');
-let currentInput;
-let initialTextShown = false; // Flag per evitare che il testo iniziale venga mostrato più volte
+const output = document.getElementById('output'); 
+let currentInput; 
+let initialTextShown = false; 
+
 
 function typeText(text, delay = 30) {
-    if (initialTextShown) return; // Impedisce l'esecuzione se il testo è già stato mostrato
+    if (initialTextShown) return; 
 
     let index = 0;
     function type() {
         if (index < text.length) {
             output.innerHTML += text[index] === '\n' ? '<br>' : text[index];
             index++;
-            setTimeout(type, Math.random() * 15 + 5);
+            setTimeout(type, Math.random() * 15 + 5); 
         } else {
-            enableInput();
-            initialTextShown = true; // Imposta il flag a true dopo aver mostrato il testo
+            initialTextShown = true; 
+            enableInput(); 
         }
     }
     setTimeout(type, delay);
 }
 
+
 function enableInput() {
+    const inputLine = document.createElement('div');
+    inputLine.className = 'input-line';
+
+    const promptSpan = document.createElement('span');
+    promptSpan.className = 'prompt';
+    promptSpan.textContent = 'root@fra:~$ ';
+    inputLine.appendChild(promptSpan);
+
     currentInput = document.createElement('input');
     currentInput.type = 'text';
     currentInput.className = 'terminal-input';
     currentInput.placeholder = 'Digita qui...';
-    terminal.appendChild(currentInput);
-    currentInput.focus();
+    inputLine.appendChild(currentInput);
 
+    terminal.appendChild(inputLine);
+    currentInput.focus();
     currentInput.addEventListener('keydown', handleInput);
 }
 
 function handleInput(event) {
     if (event.key === 'Enter') {
-        const value = event.target.value.trim().toLowerCase();
-        event.target.value = '';
+        const commandText = currentInput.value.trim(); 
+        const commandLower = commandText.toLowerCase(); 
+        const currentInputLine = currentInput.parentElement; 
+        currentInput.disabled = true; 
+        currentInput.removeEventListener('keydown', handleInput); 
 
-        const response = document.createElement('div');
-        response.className = 'response';
 
-        switch (value) {
+        const commandEchoDiv = document.createElement('div');
+        commandEchoDiv.className = 'command-echo';
+        commandEchoDiv.innerHTML = `<span class="prompt">root@fra:~$</span> ${escapeHtml(commandText)}`;
+
+        if (currentInputLine && currentInputLine.parentNode === terminal) {
+            terminal.replaceChild(commandEchoDiv, currentInputLine);
+        } else {
+            terminal.appendChild(commandEchoDiv);
+        }
+
+        const responseDiv = document.createElement('div');
+        responseDiv.className = 'response';
+        let shouldCreateNewInput = true;
+
+        switch (commandLower) {
             case 'help':
-            case 'fra help':
-                response.innerHTML = "Comandi disponibili:<br>- help: Visualizza questo messaggio di aiuto<br>- info: Mostra informazioni sul sito<br>- comandi: Elenca tutti i comandi disponibili<br>- chi sei?: Informazioni sull'utente<br>- ciao: Saluta";
+            case 'h':
+                responseDiv.innerHTML = "Comandi disponibili:<br>" +
+                                      "- help: Visualizza questo messaggio di aiuto<br>" +
+                                      "- info: Mostra informazioni sul sito<br>" +
+                                      "- comandi: Elenca tutti i comandi disponibili<br>" +
+                                      "- chi sei?: Informazioni sull'utente<br>" +
+                                      "- ciao: Saluta<br>" +
+                                      "- data: Mostra la data corrente<br>" +
+                                      "- ora: Mostra l'ora corrente<br>" +
+                                      "- versione: Mostra la versione del terminale<br>" +
+                                      "- clear: Pulisce il terminale<br>" +
+                                      "- exit: Esce dal terminale";
                 break;
             case 'info':
-                response.innerHTML = "Questo è un terminale interattivo. Puoi utilizzare i comandi disponibili per ottenere informazioni.";
+                responseDiv.innerHTML = "Questo è un terminale interattivo. Puoi utilizzare i comandi disponibili per ottenere informazioni.";
                 break;
             case 'comandi':
-                response.innerHTML = "Lista dei comandi:<br>- help<br>- info<br>- comandi<br>- chi sei?<br>- ciao<br>- clear<br>- exit<br>- data<br>- ora<br>- versione";
+                responseDiv.innerHTML = "Lista dei comandi:<br>- help<br>- info<br>- comandi<br>- chi sei?<br>- ciao<br>- data<br>- ora<br>- versione<br>- clear<br>- exit";
                 break;
             case 'chi sei?':
             case 'chi sei':
-                response.innerHTML = "Sono un ethical hacker e sviluppatore web. Spero di poterti essere utile!";
+                responseDiv.innerHTML = "Sono un ethical hacker e sviluppatore web. Spero di poterti essere utile!";
                 break;
             case 'ciao':
-                response.innerHTML = "Ciao!";
+            case 'ciao!': case 'salve': case 'salve!': // Raggruppato i saluti
+            case 'hello': case 'hi': case 'hey': case 'hey!':
+            case 'saluti': case 'saluti!':
+                responseDiv.innerHTML = "Ciao! Come posso aiutarti oggi?";
                 break;
             case 'data':
-                response.innerHTML = new Date().toLocaleDateString();
+                responseDiv.innerHTML = `Data corrente: ${new Date().toLocaleDateString('it-IT')}`;
                 break;
             case 'ora':
-                response.innerHTML = new Date().toLocaleTimeString();
+                responseDiv.innerHTML = `Ora corrente: ${new Date().toLocaleTimeString('it-IT', { hour: '2-digit', minute: '2-digit', second: '2-digit' })}`;
                 break;
             case 'versione':
-                response.innerHTML = "Terminale V1.0_alpha";
+                responseDiv.innerHTML = "Terminale Interattivo v1.1.0";
                 break;
             case 'clear':
-                terminal.innerHTML = ''; // Cancella tutto
-                enableInput(); // Ricrea l'input
-                return; // Importante per evitare di aggiungere una risposta vuota
+                // Rimuove tutti gli eco dei comandi e le risposte precedenti.
+                // Il testo iniziale nell'elemento 'output' viene conservato.
+                const elementsToClear = terminal.querySelectorAll('.command-echo, .response, .final-message, .input-line');
+                elementsToClear.forEach(el => {
+                    // Non rimuovere l'eco del comando 'clear' appena aggiunto
+                    if (el !== commandEchoDiv && el.parentElement === terminal) {
+                         terminal.removeChild(el);
+                    }
+                });
+                break;
             case 'exit':
-                response.innerHTML = "Uscita dal terminale.";
-                enableInput(); // Ricrea l'input
-                return;
+                responseDiv.innerHTML = "Disconnessione dal terminale... Arrivederci!";
+                shouldCreateNewInput = false;
+                break;
             default:
-                response.innerHTML = "Comando non riconosciuto. Digita 'fra help' per la lista dei comandi.";
+                responseDiv.innerHTML = `Comando non riconosciuto: "${escapeHtml(commandText)}". Digita 'help' per la lista dei comandi.`;
         }
 
-        terminal.insertBefore(response, currentInput);
+        if (responseDiv.innerHTML.trim() !== "") {
+            terminal.appendChild(responseDiv);
+        }
+        if (shouldCreateNewInput) {
+            enableInput(); 
+        } else {
+            const finalMsg = document.createElement('div');
+            finalMsg.textContent = "Terminale disattivato. Ricarica la pagina per riavviare.";
+            finalMsg.className = 'final-message'; 
+            terminal.appendChild(finalMsg);
+
+        }
         terminal.scrollTop = terminal.scrollHeight;
     }
 }
 
-const initialText = `root@fra:~$ Benvenuto!\nroot@fra:~$ Inizio il mio percorso da bambino, adoravo smontare ogni cosa che avevo in casa di elettronico\nroot@fra:~$ Ora sono un ethical hacker e sviluppatore web\nroot@fra:~$ Spero di poterti essere utile!\nroot@fra:~$ Digita 'fra help' per visualizzare i comandi disponibili`;
+function escapeHtml(unsafe) {
+    if (typeof unsafe !== 'string') {
+        return '';
+    }
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+}
 
-// Attiva la funzione typeText quando l'elemento .terminal è visibile
-window.addEventListener('scroll', handleScroll);
+
+const initialText = `root@fra:~$ Benvenuto!\nroot@fra:~$ Inizio il mio percorso da bambino, adoravo smontare ogni cosa che avevo in casa di elettronico\nroot@fra:~$ Ora sono un ethical hacker e sviluppatore web\nroot@fra:~$ Spero di poterti essere utile!\nroot@fra:~$ Digita 'help' per visualizzare i comandi disponibili`;
+
 
 function handleScroll() {
-    const terminal = document.querySelector('.terminal');
-    const windowHeight = window.innerHeight;
-    const terminalTop = terminal.getBoundingClientRect().top;
-    const elementVisible = 120;
+    const terminalElement = document.querySelector('.terminal'); 
+    if (!terminalElement) return; 
 
-    if (terminalTop < windowHeight - elementVisible) {
-        typeText(initialText, 500); // Passa il testo iniziale alla funzione
-        window.removeEventListener('scroll', handleScroll); // Disabilita l'event listener dopo l'esecuzione
+    const windowHeight = window.innerHeight;
+    const terminalTop = terminalElement.getBoundingClientRect().top;
+    const elementVisibleThreshold = 120; 
+
+    if (terminalTop < windowHeight - elementVisibleThreshold) {
+        if (!initialTextShown) { 
+             typeText(initialText, 500); 
+        }
+        window.removeEventListener('scroll', handleScroll); 
     }
 }
+
+window.addEventListener('scroll', handleScroll);
+document.addEventListener('DOMContentLoaded', handleScroll);
+
+
 
 
 
@@ -336,37 +413,22 @@ function updateProgress() {
 }
 
 
-
-// Attiva la funzione updateProgress quando l'elemento .terminal2 è visibile
-
 window.addEventListener('scroll', handleScrolll);
 
-// Funzione per attivare animazioni (es. terminale CV) quando visibili
 function handleScrolll() { 
-    // Seleziona l'elemento specifico (es. terminal2 per CV)
     const terminal2 = document.querySelector('.terminal2'); 
-    
-    // AGGIUNGI CONTROLLO: Se l'elemento .terminal2 non esiste in questa pagina, esci
     if (!terminal2) { 
         return; 
     }
-
-    // Se l'elemento esiste, procedi con la logica originale
     const windowHeight = window.innerHeight;
-    // Ora è sicuro chiamare getBoundingClientRect perché terminal2 esiste
     const terminal2Top = terminal2.getBoundingClientRect().top; 
-    const elementVisible = 120; // Soglia di visibilità
+    const elementVisible = 120; 
 
     if (terminal2Top < windowHeight - elementVisible) {
-        // Chiama la funzione che fa partire l'animazione (es. updateProgress)
-        // Assicurati che anche updateProgress() controlli se i suoi elementi esistono!
-        if (typeof updateProgress === 'function') { // Controlla se la funzione esiste
+        if (typeof updateProgress === 'function') {
              updateProgress(); 
         }
-        // Rimuovi il listener se l'animazione deve partire solo una volta
         window.removeEventListener('scroll', handleScrolll); 
     }
 }
 
-// Assicurati che l'event listener nel tuo script usi questo nome di funzione:
-// window.addEventListener('scroll', handleScrolll);
