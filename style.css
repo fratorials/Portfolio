@@ -678,7 +678,6 @@ footer h2{
     max-width: 95%; /* Limite per schermi piccoli */
     max-height: 90%;/* Limite per schermi piccoli */
 
-    /* Assicurati che queste proprietà siano ancora presenti: */
     background-color: #f0f0f0;
     border: 1px solid #a0a0a0;
     border-radius: 5px;
@@ -688,7 +687,6 @@ footer h2{
     overflow: hidden; /* Mantiene l'overflow hidden */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     z-index: 990; /* Assicurati che sia sopra altri elementi ma sotto la modale foto */
-    transition: top 0.3s ease-in-out; /* Transizione per il movimento */
 }
 
 .title-bar {
@@ -701,6 +699,11 @@ footer h2{
     border-bottom: 1px solid #a0a0a0;
     user-select: none; /* Impedisce la selezione del testo durante il drag */
     cursor: grab; /* Cursore iniziale per il trascinamento */
+}
+
+.explorer-window.maximized-window {
+    border-radius: 0;
+    transition: none !important; 
 }
 
 /* Stile opzionale mentre si trascina */
@@ -889,6 +892,8 @@ footer h2{
     border-radius: 5px;
     box-shadow: 0 5px 20px rgba(0, 0, 0, 0.4);
     display: flex;
+    cursor: grab;
+    position: relative;
     flex-direction: column;
     overflow: hidden;
 }
@@ -927,6 +932,8 @@ footer h2{
     max-width: 100%; /* Immagine non più larga dell'area */
     max-height: 100%; /* Immagine non più alta dell'area */
     display: block;
+    transition: none;
+    will-change: transform;
 }
 
 .photo-controls {
